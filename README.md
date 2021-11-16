@@ -1,5 +1,4 @@
 # ninemakers_supporters
----
 
 ## *1. reactjs 익히기*
 - [ex]react.js로 영화 웹 서비스 만들기
