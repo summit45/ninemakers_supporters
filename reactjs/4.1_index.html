@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<body>
+    <div id="root">
+        <div>
+            <h3 id="title">Hello I'm a title</h3>
+            <button style="background-color: tomato;">Click me</button>
+        </div>
+    </div>
+</body>
+
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+    function Btn({ text, onClick }) {
+        console.log(text, "was renderd") // 언제 버튼이 render되는지 보여줌
+        // Save Changes , Continue 생성
+        // 그다음에 onClick()하면 Revert Changes , Continue 생성
+        // 부모의 상태를 바꾸는 함수 & 함수를 실행하는데 자식이 실행
+        return (
+        <button
+            onClick={onClick} // props(뒤, {}안)과 eventlistener(앞) 구분
+            style={{
+                backgroundColor: "tomato",
+                color: "white",
+                padding: "10px 20px",
+                border: 0,
+                borderRadius: 10,
+                fontSize: 16,
+            }}
+        >
+            {text}
+        </button>
+        );
+    }
+
+    const MemorizedBtn = React.memo(Btn);
+    function App() {
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => setValue("Revert Changes");
+        return (
+            <div>
+                <MemorizedBtn text={value} onClick={changeValue} />
+                <MemorizedBtn text="Continue" />
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>
